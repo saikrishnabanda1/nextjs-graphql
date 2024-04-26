@@ -25,14 +25,14 @@ const typeDefs = gql`
   }
 
   type Rating {
-    rate: ID
+    rate: Float
     count: ID
   }
 
   type Category {
     id: ID
     title: String
-    price: ID
+    price: Float
     description: String
     category: String
     image: String
