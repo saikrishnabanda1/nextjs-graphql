@@ -39,9 +39,20 @@ const typeDefs = gql`
     rating: Rating
   }
 
+  type Product {
+    id: ID
+    title: String
+    price: Float
+    description: String
+    category: String
+    image: String
+    rating: Rating
+  }
+
   type Query {
     books: [Book]
     category(type: String): [Category]
+    product(productId: ID): Product
   }
 `;
 
@@ -54,6 +65,10 @@ const resolvers = {
           return data.json();
         }
       ),
+    product: (_, { productId }) =>
+      fetch(`https://fakestoreapi.com/products/${productId}`).then((data) => {
+        return data.json();
+      }),
   },
 };
 
