@@ -24,15 +24,36 @@ const typeDefs = gql`
     author: String
   }
 
+  type Rating {
+    rate: ID
+    count: ID
+  }
+
+  type Category {
+    id: ID
+    title: String
+    price: ID
+    description: String
+    category: String
+    image: String
+    rating: Rating
+  }
+
   type Query {
     books: [Book]
+    category(type: String): [Category]
   }
 `;
 
 const resolvers = {
   Query: {
     books: () => books,
-    // products: () => products,
+    category: (_, { type }) =>
+      fetch(`https://fakestoreapi.com/products/category/${type}`).then(
+        (data) => {
+          return data.json();
+        }
+      ),
   },
 };
 
